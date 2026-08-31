@@ -319,7 +319,7 @@ class SU3ResonanceLayer(nn.Module):
         dst_amp = torch.linalg.vector_norm(Z_photon_d, dim=-1)
         phase = self.electron_phase_mlp(dst_amp)
         Z_photon_t = Z_photon_t * torch.exp(1j * phase).unsqueeze(-1)
-resonance_photon = self.compute_resonance(Z_photon_t, Z_photon_d)
+        resonance_photon = self.compute_resonance(Z_photon_t, Z_photon_d)
         msg_photon = Z_photon_t * resonance_photon.unsqueeze(-1) * norm.view(-1, 1, 1)
 
         # --- 7. Реальные фотоны (слова/звук) — чистый вход -------------
