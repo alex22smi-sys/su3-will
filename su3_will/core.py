@@ -112,11 +112,11 @@ class SU3GaugeField(nn.Module):
         else:
             ids = torch.arange(E, device=edge_index.device) % self.max_edges
             return self.phi_embed(ids)
-def lie_algebra_element(self, phi: torch.Tensor) -> torch.Tensor:
+    def lie_algebra_element(self, phi: torch.Tensor) -> torch.Tensor:
         gen = torch.einsum("ea,abc->ebc", phi.to(self.T.dtype), self.T)
         return 1j * gen
 
-@staticmethod
+    @staticmethod
     def exponential_map(A: torch.Tensor) -> torch.Tensor:
         return torch.linalg.matrix_exp(A)
 
