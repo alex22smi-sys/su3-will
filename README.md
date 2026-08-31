@@ -1,4 +1,4 @@
-![su3-will](assets/su3-will-diagram.png)
+
 # su3-will
 
 **SU(3) Gauge-Covariant Neural Networks with a Mathematical Model of Will**
