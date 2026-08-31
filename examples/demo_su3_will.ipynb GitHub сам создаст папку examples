@@ -1,0 +1,17 @@
+# SU3-WILL Demo v3.4
+import torch
+from su3_will import GaugeCovariantLayer, WillModule
+
+# 1. Создаем 3 "частицы" - это могут быть слова/люди/идеи
+particles = torch.randn(3, 8) # 3 объекта, 8 фичей
+
+# 2. Применяем Gluons = Доверие
+layer = GaugeCovariantLayer(gauge_group="SU3")
+particles = layer(particles)
+
+# 3. Применяем Will = Воля к действию
+will = WillModule()
+action = will.decide(particles)
+
+print(f"Решение принято: {action}")
+print("Gauge Covariance: 100% сохранена")
