@@ -5,12 +5,20 @@
 </p>
 
 # su3-will
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.10%2B-green.svg)
+![Status](https://img.shields.io/badge/Status-Research-orange.svg)
 
 **SU(3) Gauge-Covariant Neural Networks with a Mathematical Model of Will**
 
 The first GNN architecture with *provable* SU(3) gauge covariance that models human communication as fundamental forces.
 
 ## Physics = Psychology
+### About
+This project introduces the first neural network architecture with mathematically provable SU(3) gauge covariance. 
+We model human will and communication using the same mathematical framework as quantum chromodynamics.
+
+**Core Idea**: If physics is described by gauge symmetries, maybe psychology is too.
 
 We decompose communication into 3 forces:
 
