@@ -1,0 +1,9 @@
+# Examples
+
+Запусти демо прямо в браузере через Google Colab:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/alex22smi-sys/su3-will/blob/main/examples/demo_su3_will.ipynb)
+
+### demo_su3_will.ipynb
+Показывает как работает SU(3) Gauge-Covariant сеть на 3-х "частицах".
+Демонстрирует 3 силы: Gluon, Photon, Graviton = Доверие, Коммуникация, Воля.
