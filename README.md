@@ -1,4 +1,6 @@
 ![su3-will](assets/photo_2026-08-31_20-16-42.jpg)
+![su3-will](assets/su3-will-diagram.jpg)
+### Калибровочно-ковариантные нейронные сети SU(3) с математической моделью воли
 # su3-will
 
 **SU(3) Gauge-Covariant Neural Networks with a Mathematical Model of Will**
