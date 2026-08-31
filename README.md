@@ -1,4 +1,4 @@
-https://github.com/alex22smi-sys/su3-will/blob/main/%D1%80%D0%B5%D1%81%D1%83%D1%80%D1%81%D1%8B/photo_2026-08-31_20-16-42.jpg
+ресурсы/photo_2026-08-31_20-16-42.jpg
 # su3-will
 
 **SU(3) Gauge-Covariant Neural Networks with a Mathematical Model of Will**
