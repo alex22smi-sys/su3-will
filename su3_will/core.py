@@ -637,7 +637,6 @@ def run_self_test() -> None:
 Z_final, all_diag, total_c, final_resonance = gnn(
         Z, edge_index, edge_attr=edge_attr, triangles=triangles
     )
-    print(f"  final shape:       {tuple(Z_final.shape)}")
     for i, d in enumerate(all_diag):
         print(f"  layer {i} unitary:  {d.unitarity_error:.3e}")
 
