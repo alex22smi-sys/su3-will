@@ -1,4 +1,4 @@
-ресурсы/su3-will-diagram.jpg
+assets/su3-will-diagram.jpg
 # su3-will
 
 **SU(3) Gauge-Covariant Neural Networks with a Mathematical Model of Will**
