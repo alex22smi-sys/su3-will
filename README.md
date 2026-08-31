@@ -1,3 +1,4 @@
+<img width="725" height="1280" alt="photo_2026-08-31_20-16-42" src="https://github.com/user-attachments/assets/56b6ca25-2bac-4e0b-a9b2-a129190c11c1" />
 # su3-will
 
 **SU(3) Gauge-Covariant Neural Networks with a Mathematical Model of Will**
