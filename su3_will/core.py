@@ -223,8 +223,8 @@ class SU3ResonanceLayer(nn.Module):
             self.real_photon_proj = nn.Linear(edge_attr_dim, out_channels)
         else:
             self.real_photon_proj = None
-    self.dropout_p = float(dropout)
-        self.norm = nn.LayerNorm(out_channels, elementwise_affine=True)
+            self.dropout_p = float(dropout)
+            self.norm = nn.LayerNorm(out_channels, elementwise_affine=True)
 
     def project_features(self, Z: torch.Tensor, W: torch.Tensor) -> torch.Tensor:
         return torch.einsum("nfc,fg->ngc", Z, W)
