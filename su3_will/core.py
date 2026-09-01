@@ -1,23 +1,3 @@
-"""
-SU(3) Gauge-Covariant Resonance Graph Layer — v3.4 (Strict Gauge Covariance)
-
-Уточнённая онтология:
-  - Глюон (U, W_gluon) = сильное взаимодействие = тактильное/сенсорное прикосновение.
-  - Реальные фотоны (Z_real_t * sigmoid(edge_attr)) = слова, звук, речь. 
-    Приходят извне (edge_attr), модулируют интенсивность калибровочного поля напрямую.
-  - Виртуальные фотоны (W_photon + electron_phase) = мышление. Электрон получателя,
-    глядя на своё собственное состояние (dst_amp), незаметно искажает фазу.
-
-Воля = совокупность преодолений (will_power).
-
-Изменения v3.3 -> v3.4:
-  - Восстановлена строгая калибровочная эквивариантность (Gauge Covariance Error < 1e-6).
-  - edge_attr теперь не генерирует произвольный вектор в color-пространстве,
-    а калибровочно-инвариантно модулирует параллельно переносимое состояние Z_real_t.
-"""
-
-from future import annotations
-
 import math
 from dataclasses import dataclass
 from typing import List, Optional, Tuple
@@ -74,14 +54,14 @@ def get_gell_mann_matrices(
 # =============================================================================
 
 class SU3GaugeField(nn.Module):
-    def init(
+    def __init__(
         self,
         edge_attr_dim: Optional[int] = None,
         max_edges: int = 10_000,
         init_scale: float = 1e-2,
         dtype: torch.dtype = torch.complex64,
     ):
-        super().init()
+        super().__init__()
         self.edge_attr_dim = edge_attr_dim
         self.max_edges = max_edges
 
@@ -112,7 +92,8 @@ class SU3GaugeField(nn.Module):
         else:
             ids = torch.arange(E, device=edge_index.device) % self.max_edges
             return self.phi_embed(ids)
-def lie_algebra_element(self, phi: torch.Tensor) -> torch.Tensor:
+
+    def lie_algebra_element(self, phi: torch.Tensor) -> torch.Tensor:
         gen = torch.einsum("ea,abc->ebc", phi.to(self.T.dtype), self.T)
         return 1j * gen
 
@@ -156,7 +137,7 @@ class ResonanceDiagnostics:
 
 
 class SU3ResonanceLayer(nn.Module):
-    def init(
+    def __init__(
         self,
         in_channels: int,
         out_channels: int,
@@ -167,7 +148,7 @@ class SU3ResonanceLayer(nn.Module):
         resonance_power: float = 1.0,
         eps: float = 1e-8,
     ):
-        super().init()
+        super().__init__()
 
         self.in_channels = in_channels
         self.out_channels = out_channels
@@ -223,7 +204,7 @@ class SU3ResonanceLayer(nn.Module):
             self.real_photon_proj = nn.Linear(edge_attr_dim, out_channels)
         else:
             self.real_photon_proj = None
-self.dropout_p = float(dropout)
+        self.dropout_p = float(dropout)
         self.norm = nn.LayerNorm(out_channels, elementwise_affine=True)
 
     def project_features(self, Z: torch.Tensor, W: torch.Tensor) -> torch.Tensor:
@@ -319,7 +300,7 @@ self.dropout_p = float(dropout)
         dst_amp = torch.linalg.vector_norm(Z_photon_d, dim=-1)
         phase = self.electron_phase_mlp(dst_amp)
         Z_photon_t = Z_photon_t * torch.exp(1j * phase).unsqueeze(-1)
-resonance_photon = self.compute_resonance(Z_photon_t, Z_photon_d)
+        resonance_photon = self.compute_resonance(Z_photon_t, Z_photon_d)
         msg_photon = Z_photon_t * resonance_photon.unsqueeze(-1) * norm.view(-1, 1, 1)
 
         # --- 7. Реальные фотоны (слова/звук) — чистый вход -------------
@@ -411,7 +392,7 @@ class GaugeDiagnostics:
     unitarity_error: float
     determinant_error: float
 class SU3GaugeBlock(nn.Module):
-    def init(
+    def __init__(
         self,
         in_channels: int,
         out_channels: int,
@@ -422,7 +403,7 @@ class SU3GaugeBlock(nn.Module):
         dropout: float = 0.0,
         use_curvature_reg: bool = False,
     ):
-        super().init()
+        super().__init__()
         self.use_curvature_reg = use_curvature_reg
         self.gauge = SU3GaugeField(edge_attr_dim=edge_attr_dim)
         self.layer = SU3ResonanceLayer(
@@ -469,7 +450,7 @@ class SU3GaugeBlock(nn.Module):
 
 
 class SU3ResonanceGNN(nn.Module):
-    def init(
+    def __init__(
         self,
         in_channels: int,
         hidden_channels: int,
@@ -481,7 +462,7 @@ class SU3ResonanceGNN(nn.Module):
         dropout: float = 0.0,
         use_curvature_reg: bool = False,
     ):
-        super().init()
+        super().__init__()
         self.num_layers = num_layers
         dims = [in_channels] + [hidden_channels] * (num_layers - 1) + [out_channels]
 
@@ -634,7 +615,7 @@ def run_self_test() -> None:
         edge_attr_dim=edge_attr_dim,
         dropout=0.1,
     ).to(device)
-Z_final, all_diag, total_c, final_resonance = gnn(
+    Z_final, all_diag, total_c, final_resonance = gnn(
         Z, edge_index, edge_attr=edge_attr, triangles=triangles
     )
     print(f"  final shape:       {tuple(Z_final.shape)}")
@@ -652,5 +633,5 @@ Z_final, all_diag, total_c, final_resonance = gnn(
     print("=" * 70)
 
 
-if name == "main":
+if __name__ == "__main__":
     run_self_test()
