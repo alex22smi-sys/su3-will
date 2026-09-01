@@ -112,7 +112,7 @@ class SU3GaugeField(nn.Module):
         else:
             ids = torch.arange(E, device=edge_index.device) % self.max_edges
             return self.phi_embed(ids)
-    def lie_algebra_element(self, phi: torch.Tensor) -> torch.Tensor:
+def lie_algebra_element(self, phi: torch.Tensor) -> torch.Tensor:
         gen = torch.einsum("ea,abc->ebc", phi.to(self.T.dtype), self.T)
         return 1j * gen
 
@@ -223,8 +223,8 @@ class SU3ResonanceLayer(nn.Module):
             self.real_photon_proj = nn.Linear(edge_attr_dim, out_channels)
         else:
             self.real_photon_proj = None
-            self.dropout_p = float(dropout)
-            self.norm = nn.LayerNorm(out_channels, elementwise_affine=True)
+self.dropout_p = float(dropout)
+        self.norm = nn.LayerNorm(out_channels, elementwise_affine=True)
 
     def project_features(self, Z: torch.Tensor, W: torch.Tensor) -> torch.Tensor:
         return torch.einsum("nfc,fg->ngc", Z, W)
@@ -319,7 +319,7 @@ class SU3ResonanceLayer(nn.Module):
         dst_amp = torch.linalg.vector_norm(Z_photon_d, dim=-1)
         phase = self.electron_phase_mlp(dst_amp)
         Z_photon_t = Z_photon_t * torch.exp(1j * phase).unsqueeze(-1)
-        resonance_photon = self.compute_resonance(Z_photon_t, Z_photon_d)
+resonance_photon = self.compute_resonance(Z_photon_t, Z_photon_d)
         msg_photon = Z_photon_t * resonance_photon.unsqueeze(-1) * norm.view(-1, 1, 1)
 
         # --- 7. Реальные фотоны (слова/звук) — чистый вход -------------
@@ -637,7 +637,8 @@ def run_self_test() -> None:
 Z_final, all_diag, total_c, final_resonance = gnn(
         Z, edge_index, edge_attr=edge_attr, triangles=triangles
     )
-for i, d in enumerate(all_diag):
+    print(f"  final shape:       {tuple(Z_final.shape)}")
+    for i, d in enumerate(all_diag):
         print(f"  layer {i} unitary:  {d.unitarity_error:.3e}")
 
     print("\nWill power per layer (accumulated overcoming):")
